@@ -1,5 +1,5 @@
 /*
- * Copyright © 2019 Peter M. Stahl pemistahl@gmail.com
+ * Copyright © 2021 Peter M. Stahl pemistahl@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,4 @@
  * limitations under the License.
  */
 
-use structopt::StructOpt;
-
-#[derive(StructOpt)]
-#[structopt(author, about)]
-struct CLI {}
-
-fn main() {
-    let cli = CLI::from_args();
-    println!("There is no public functionality yet.");
-}
+fn main() {}
