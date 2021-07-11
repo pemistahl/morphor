@@ -14,4 +14,11 @@
  * limitations under the License.
  */
 
+use pest::Parser;
+use pest_derive::Parser;
+
+#[derive(Parser)]
+#[grammar = "grammar.pest"]
+struct RegExpParser;
+
 fn main() {}

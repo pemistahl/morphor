@@ -30,8 +30,8 @@ categories = ["command-line-utilities", "parser-implementations", "text-processi
 [dependencies]
 pest = "2.1.3"
 pest_derive = "2.1.0"
-petgraph = "0.5.1"
-structopt = "0.3.21"
+petgraph = "0.6.0"
+structopt = "0.3.22"
 
 [dev-dependencies]
-rstest = "0.6.4"
+rstest = "0.10.0"
