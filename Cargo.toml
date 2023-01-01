@@ -1,5 +1,5 @@
 #
-# Copyright © 2021 Peter M. Stahl pemistahl@gmail.com
+# Copyright © 2023 Peter M. Stahl pemistahl@gmail.com
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,14 +24,13 @@ homepage = "https://github.com/pemistahl/morphor"
 repository = "https://github.com/pemistahl/morphor"
 license = "Apache-2.0"
 readme = "README.md"
-edition = "2018"
+edition = "2021"
 categories = ["command-line-utilities", "parser-implementations", "text-processing"]
 
 [dependencies]
-pest = "2.1.3"
-pest_derive = "2.1.0"
-petgraph = "0.6.0"
-structopt = "0.3.22"
+pest = "2.5.2"
+pest_derive = "2.5.2"
+petgraph = "0.6.2"
 
 [dev-dependencies]
-rstest = "0.10.0"
+rstest = "0.16.0"

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2021 Peter M. Stahl pemistahl@gmail.com
+ * Copyright © 2023 Peter M. Stahl pemistahl@gmail.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,4 @@ use pest_derive::Parser;
 
 #[derive(Parser)]
 #[grammar = "grammar.pest"]
-struct RegExpParser;
-
-fn main() {}
+pub struct RegexParser;
