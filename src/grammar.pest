@@ -1,5 +1,5 @@
 //
-// Copyright © 2021 Peter M. Stahl pemistahl@gmail.com
+// Copyright © 2023 Peter M. Stahl pemistahl@gmail.com
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,6 +12,159 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either expressed or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+// ##############################
+// Commands
+// ##############################
+
+long_command = {
+      "ambiguous" ~ "upper"
+    | "apply" ~ "down"
+    | "apply" ~ "med"
+    | "apply" ~ "up"
+    | "apropos"
+    | "assert-stack"
+    | "clear" ~ "stack"
+    | "close" ~ "sigma"
+    | "compact" ~ "sigma"
+    | "complete" ~ "net"
+    | "compose" ~ "net"
+    | "concatenate" ~ "net"
+    | "crossproduct" ~ "net"
+    | "define"
+    | "determinize" ~ "net"
+    | "echo"
+    | "eliminate" ~ "flags"
+    | "eliminate" ~ "flag"
+    | "export" ~ "cmatrix"
+    | "extract" ~ "ambiguous"
+    | "extract" ~ "unambiguous"
+    | "factorize"
+    | "help" ~ "license"
+    | "help" ~ "warranty"
+    | "ignore" ~ "net"
+    | "intersect" ~ "net"
+    | "invert" ~ "net"
+    | "label" ~ "net"
+    | "letter" ~ "machine"
+    | "load" ~ "defined"
+    | "lower-side" ~ "net"
+    | "minimize" ~ "net"
+    | "name" ~ "net"
+    | "negate" ~ "net"
+    | "one-plus" ~ "net"
+    | "pop" ~ "stack"
+    | "print" ~ "defined"
+    | "print" ~ "dot"
+    | "print" ~ "lower-words"
+    | "print" ~ "cmatrix"
+    | "print" ~ "name"
+    | "print" ~ "net"
+    | "print" ~ "random-lower"
+    | "print" ~ "random-upper"
+    | "print" ~ "random-words"
+    | "print" ~ "sigma"
+    | "print" ~ "size"
+    | "print" ~ "shortest-string"
+    | "print" ~ "shortest-string-length"
+    | "print" ~ "words"
+    | "print" ~ "pairs"
+    | "print" ~ "random-pairs"
+    | "print" ~ "upper-words"
+    | "prune" ~ "net"
+    | "push" ~ "defined"
+    | "quit"
+    | "read" ~ "att"
+    | "read" ~ "cmatrix"
+    | "read" ~ "prolog"
+    | "read" ~ "lexc"
+    | "read" ~ "regex"
+    | "read" ~ "spaced-text"
+    | "read" ~ "text"
+    | "reverse" ~ "net"
+    | "rotate" ~ "stack"
+    | "save" ~ "defined"
+    | "save" ~ "stack"
+    | "sequentialize"
+    | "set"
+    | "show" ~ "variables"
+    | "show" ~ "variable"
+    | "shuffle" ~ "net"
+    | "sigma"
+    | "sigma" ~ "net"
+    | "source"
+    | "sort" ~ "in"
+    | "sort" ~ "net"
+    | "sort" ~ "out"
+    | "substitute" ~ "defined"
+    | "substitute" ~ "symbol"
+    | "system"
+    | "test" ~ "unambiguous"
+    | "test" ~ "equivalent"
+    | "test" ~ "functional"
+    | "test" ~ "identity"
+    | "test" ~ "lower-universal"
+    | "test" ~ "upper-universal"
+    | "test" ~ "non-null"
+    | "test" ~ "null"
+    | "test" ~ "sequential"
+    | "turn" ~ "stack"
+    | "twosided" ~ "flag-diacritics"
+    | "undefine"
+    | "union" ~ "net"
+    | "upper-side" ~ "net"
+    | "view" ~ "net"
+    | "write" ~ "att"
+    | "write" ~ "prolog"
+    | "zero-plus" ~ "net"
+}
+
+short_command = {
+      "ambiguous"
+    | "close"
+    | "down"
+    | "up"
+    | "med"
+    | "size"
+    | "loadd"
+    | "lower-words"
+    | "upper-words"
+    | "net"
+    | "random-lower"
+    | "random-upper"
+    | "words"
+    | "random-words"
+    | "regex"
+    | "rpl"
+    | "au revoir"
+    | "bye"
+    | "exit"
+    | "saved"
+    | "seq"
+    | "ss"
+    | "stack"
+    | "tunam"
+    | "tid"
+    | "tfu"
+    | "tlu"
+    | "tuu"
+    | "tnu"
+    | "tnn"
+    | "tseq"
+    | "tsf"
+    | "equ"
+    | "pss"
+    | "psz"
+    | "ratt"
+    | "tfd"
+    | "hyvästi"
+    | "watt"
+    | "wpl"
+    | "examb"
+    | "exunamb"
+    | "pairs"
+    | "random-pairs"
+}
 
 // ##############################
 // Tokens
@@ -128,9 +281,11 @@ cross_product_low_precedence = { ".x." | "\u{00d7}" }
 double_comma = { ",," }
 flag_eliminate = { ".f" }
 element_of = { "\u{2208}" }
+empty_set = { "\u{2205}" }
 end = { ";" }
 end_d = { ";d" }
 end_m = { ";m" }
+epsilon = { "\"\"" | "[]" | "0" | "\u{03b5}" }
 follows = { ">" | "\u{227b}" }
 ignore_all = { "/" }
 ignore_internal = { "./." }
@@ -145,12 +300,13 @@ left_bracket = { "[" }
 left_parenthesis = { "(" }
 left_quotient = { "\\\\\\" }
 lenient_compose = { ".O." }
-lessnconcat = { "^<" ~ ('0'..'9')+ }
+lessnconcat = { "^<" ~ num }
 minus = { "-" }
-mnconcat = { "^{" ~ ('0'..'9')+ ~ comma ~ ('0'..'9')+ ~ "}" }
-morenconcat = { "^>" ~ ('0'..'9')+ }
-nconcat = { "^" ~ ('0'..'9')+ }
+mnconcat = { "^{" ~ num ~ comma ~ num ~ "}" }
+morenconcat = { "^>" ~ num }
+nconcat = { "^" ~ num }
 not_equal = { "\u{2260}" }
+num = { ('0'..'9')+ }
 precedes = { "<" | "\u{227a}" }
 priority_union_l = { ".P." }
 priority_union_u = { ".p." }
@@ -160,10 +316,12 @@ right_bracket = { "]" }
 right_parenthesis = { ")" }
 right_quotient = { "///" }
 shuffle = { "<>" | "\u{2225}" }
+sigma = { "\u{03a3}" }
 substitute = { "`" }
 term_negation = { "\\" }
 triple_dot = { "..." }
 union = { "|" | "\u{222a}" | "\u{2228}" }
+word_boundary_marker = { ".#." }
 xlower = { "." ~ ("l" | "2") | "\u{2082}" }
 xupper = { "." ~ ("u" | "1") | "\u{2081}" }
 
